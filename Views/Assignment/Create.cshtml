@@ -1,0 +1,24 @@
+@model FutbolPeruano.Models.Assignment
+
+<h2>Asignar Jugador a Equipo</h2>
+
+<form asp-action="Create">
+    <div class="mb-3">
+        <label asp-for="PlayerId" class="form-label">Jugador</label>
+        <select asp-for="PlayerId" class="form-control" asp-items="@(new SelectList(ViewBag.Players, "Id", "Nombre"))">
+            <option value="">-- Selecciona un jugador --</option>
+        </select>
+        <span asp-validation-for="PlayerId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TeamId" class="form-label">Equipo</label>
+        <select asp-for="TeamId" class="form-control" asp-items="@(new SelectList(ViewBag.Teams, "Id", "Nombre"))">
+            <option value="">-- Selecciona un equipo --</option>
+        </select>
+        <span asp-validation-for="TeamId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Asignar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

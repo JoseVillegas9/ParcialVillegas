@@ -1,0 +1,37 @@
+@model IEnumerable<FutbolPeruano.Models.Player>
+@{
+    ViewData["Title"] = "Jugadores";
+    var assignments = ViewBag.Assignments as List<FutbolPeruano.Models.Assignment>;
+}
+
+<h2>Lista de Jugadores</h2>
+<a asp-action="Create" class="btn btn-success mb-3">Nuevo Jugador</a>
+
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Posición</th>
+            <th>Equipo Asignado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var jugador in Model)
+    {
+        var asignacion = assignments?.FirstOrDefault(a => a.PlayerId == jugador.Id);
+        string equipo = asignacion?.Team?.Nombre ?? "Sin Asignar";
+        <tr>
+            <td>@jugador.Nombre</td>
+            <td>@jugador.Edad</td>
+            <td>@jugador.Posicion</td>
+            <td>@equipo</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@jugador.Id" class="btn btn-warning btn-sm">Editar</a>
+                <a asp-action="Delete" asp-route-id="@jugador.Id" class="btn btn-danger btn-sm" onclick="return confirm('Seguro que deseas eliminar este jugador?');">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
