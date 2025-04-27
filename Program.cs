@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Puerto de escucha
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-builder.WebHost.UseUrls($"http://localhost:{port}"); // 👈 CAMBIO IMPORTANTE: usar localhost
+builder.WebHost.UseUrls($"http://*:{port}");
 
 // Agregar servicios al contenedor
 builder.Services.AddControllersWithViews();
